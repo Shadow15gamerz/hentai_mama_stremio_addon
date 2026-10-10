@@ -1,9 +1,9 @@
 {
-  "name": "anime-stremio-addon",
+  "name": "my-anime-addon",
   "version": "1.0.0",
   "main": "addon.js",
   "dependencies": {
-    "stremio-addon-sdk": "^1.6.14",
+    "stremio-addon-sdk": "latest",
     "axios": "^1.7.0",
     "cheerio": "^1.0.0"
   }
