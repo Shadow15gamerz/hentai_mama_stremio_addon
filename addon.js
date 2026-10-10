@@ -14,7 +14,6 @@ const manifest = {
 
 const builder = new addonBuilder(manifest);
 
-// 1. YOUR TARGET WEBSITE
 const MY_SITE_URL = "https://hentaimama.io";
 
 builder.defineStreamHandler(async ({ type, id }) => {
@@ -23,7 +22,6 @@ builder.defineStreamHandler(async ({ type, id }) => {
     const animeId = parts[1];
     const episode = parts[2] || 1;
 
-    // 2. Fetch episode page
     const targetUrl = `${MY_SITE_URL}/watch/${animeId}?ep=${episode}`;
     const pageResponse = await axios.get(targetUrl, {
       headers: { "User-Agent": "Mozilla/5.0" }
@@ -31,7 +29,6 @@ builder.defineStreamHandler(async ({ type, id }) => {
 
     const $ = cheerio.load(pageResponse.data);
 
-    // 3. Extract direct video source (fixed operator)
     let videoSource = $("video source").attr("src") \vert{}\vert{} $("video").attr("src");
 
     if (!videoSource) {
