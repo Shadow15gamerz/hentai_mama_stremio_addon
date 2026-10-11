@@ -5,18 +5,24 @@
 //                         shadzop:<animeSlug>:<ep>       (episode)
 // ============================================================
 
-const SITE_URL = process.env.SITE_URL || "https://your-site.example";
+const SITE_URL = process.env.SITE_URL || "https://hentaimama.io";
 
 // Sample data so the addon runs end-to-end before the scraper is wired up
 const SAMPLE = [
   {
-    slug: "sample-anime",
-    name: "Sample Anime",
-    poster: "https://placehold.co/300x450?text=Sample",
-    description: "Placeholder entry. Replace with real site data.",
+    slug: "secret-mission---udercover-agents-never-back-down",
+    name: "Secret Mission – Undercover Agents Never Back Down!",
+    poster: "https://hentaimama.io/tvshows/secret-mission-undercover-agents-never-back-down/",
+    description: "Two undercover officers are posing as a married couple to surveil a drug manufacturing operation.When the neighbors grow suspicious of their lack of intimacy, they stage increasingly explicit sexual sounds to maintain their cover. The fake performance blurs into real physical contact, forcing the female officer to wrestle with humiliation and unwanted arousal. Their act successfully convinces the criminals, but leaves her shaken as she insists it was all just part of the job.",
     episodes: [
-      { number: 1, title: "Episode 1", url: "https://example.com/video1.mp4" },
-      { number: 2, title: "Episode 2", url: "https://example.com/video2.mp4" }
+      { number: 1, title: "Episode 1", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-1/" },
+      { number: 2, title: "Episode 2", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-2/" },
+      { number: 3, title: "Episode 3", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-3/" },
+      { number: 4, title: "Episode 4", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-4/" },
+      { number: 5, title: "Episode 5", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-5/" },
+      { number: 6, title: "Episode 6", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-6/" },
+      { number: 7, title: "Episode 7", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-7/" },
+      { number: 8, title: "Episode 8", url: "https://hentaimama.io/episodes/secret-mission-undercover-agents-never-back-down-episode-8/" }
     ]
   }
 ];
