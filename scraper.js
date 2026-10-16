@@ -5,7 +5,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const SITE_URL = (process.env.SITE_URL || '').replace(/\/$/, '');
+const SITE_URL = process.env.SITE_URL || 'https://hentaimama.io'
 
 const http = axios.create({
   timeout: 15000,
