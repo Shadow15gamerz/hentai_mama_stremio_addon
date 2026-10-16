@@ -1,11 +1,12 @@
+
 // Shadzop scraper
 // Made by Shadzop
-// SITE_URL is your site address (set it on Render under Environment).
+// SITE_URL is your home page address, set on Render under Environment.
 
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const SITE_URL = 'https://hentaimama.io/'
+const SITE_URL = (process.env.SITE_URL || '').replace(/\/$/, '');
 const SHOW_PATH = '/tvshows/';
 
 const http = axios.create({
@@ -59,16 +60,7 @@ function imageFrom($root, base) {
   return absolute(raw, base);
 }
 
-function episodeNumber(url, text, fallback) {
-  const m =
-    url.match(/episode[-_]?(\d+)/i) ||
-    text.match(/episode\s*(\d+)/i) ||
-    text.match(/^(\d+)$/) ||
-    url.match(/(\d+)\/?$/);
-  return m ? parseInt(m[1], 10) : fallback;
-}
-
-// Returns [{ id, name, poster, url }] for every show on the list page
+// Returns [{ id, name, poster, url }] for every show on the home page
 async function getAnimeList() {
   if (!SITE_URL) return [];
   const $ = load(await getHtml(SITE_URL));
@@ -109,6 +101,7 @@ async function getAnimeList() {
 }
 
 // Returns { name, description, poster, episodes: [{ season, number, title, url }] }
+// Episode links on this site look like: https://hemama.io/show-name-episode6/
 async function getAnimeDetails(animeUrl) {
   const $ = load(await getHtml(animeUrl));
   const origin = new URL(animeUrl).origin;
@@ -120,13 +113,14 @@ async function getAnimeDetails(animeUrl) {
     if (!url || url === animeUrl) return;
     if (new URL(url).origin !== origin) return;
 
-    const text = cleanText($a.text());
-    const looksLikeEpisode =
-      /episode/i.test(url) || /episode\s*\d+/i.test(text) || /^\d+$/.test(text);
-    if (!looksLikeEpisode || found.has(url)) return;
+    const m = url.match(/-episode(\d+)\/?$/i);
+    if (!m) return;
 
-    const number = episodeNumber(url, text, found.size + 1);
-    found.set(url, { url, title: text || `Episode ${number}`, number });
+    const number = parseInt(m[1], 10);
+    if (found.has(number)) return; // skip duplicate links to the same episode
+
+    const text = cleanText($a.text());
+    found.set(number, { url, title: text || `Episode ${number}`, number });
   });
 
   const episodes = [...found.values()]
@@ -155,8 +149,13 @@ async function getAnimeDetails(animeUrl) {
 async function getEpisodeStream(episodeUrl) {
   // Turn "https:\/\/site\/video.mp4" into "https://site/video.mp4"
   const html = (await getHtml(episodeUrl)).replace(/\\\//g, '/');
+  const $ = load(html);
 
-  // Look for a real .mp4 or .m3u8 address anywhere in the page code
+  // 1. A normal <video> tag with a plain src
+  const tagSrc = $('video source').attr('src') || $('video').attr('src');
+  if (tagSrc) return { url: absolute(tagSrc, episodeUrl), title: 'Shadzop' };
+
+  // 2. A direct .mp4 or .m3u8 address anywhere in the page code
   const direct = html.match(
     /https?:\/\/[^\s"'<>\\]+?\.(?:mp4|m3u8)(?:\?[^\s"'<>\\]*)?(?=[\s"'<>\\]|$)/i
   );
