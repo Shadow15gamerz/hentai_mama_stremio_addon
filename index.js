@@ -14,8 +14,8 @@ const manifest = {
   idPrefixes: ["shadzop"],
   catalogs: [
     {
-      type: "anime",
-      id: "shadzop-anime",
+      type: "hanime",
+      id: "shadzop-h-anime",
       name: "Shadzop H_Anime",
       extra: [
         { name: "search", isRequired: false },
@@ -29,7 +29,7 @@ const builder = new addonBuilder(manifest);
 
 // Catalog: browse list, or search when the user types in Stremio/Nuvio
 builder.defineCatalogHandler(async ({ type, id, extra }) => {
-  if (type !== "series" || id !== "shadzop-anime") return { metas: [] };
+  if (type !== "hanime" || id !== "shadzop-h-anime") return { metas: [] };
   const metas = await site.getCatalog({
     search: extra && extra.search,
     skip: Number((extra && extra.skip) || 0)
