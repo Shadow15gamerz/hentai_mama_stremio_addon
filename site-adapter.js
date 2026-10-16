@@ -1,6 +1,5 @@
 // ============================================================
-// SITE ADAPTER - the ONLY file that depends on your website.
-// Replace the sample data + TODOs once you send the site link.
+// SITE ADAPTER
 // Stremio ids look like:  shadzop:<animeSlug>            (show)
 //                         shadzop:<animeSlug>:<ep>       (episode)
 // ============================================================
@@ -12,7 +11,6 @@ const SAMPLE = require("./catalog.json");
 
 // Browse or search the anime list
 async function getCatalog({ search, skip }) {
-  // TODO: fetch the site's listing/search page and parse it
   let items = SAMPLE;
   if (search) {
     const q = search.toLowerCase();
@@ -32,7 +30,7 @@ async function getMeta(id) {
   const slug = id.split(":")[1];
   const a = SAMPLE.find(x => x.slug === slug);
   if (!a) return null;
-  // TODO: fetch the anime's page on the site for real details and episodes
+
   return {
     id,
     type: "series",
@@ -49,25 +47,30 @@ async function getMeta(id) {
   };
 }
 
-// Playable links for one episode (the "Play" options)
+// Playable links for one episode (the "Play" options with qualities)
 async function getStreams(id) {
   const [, slug, ep] = id.split(":");
   const a = SAMPLE.find(x => x.slug === slug);
   if (!a) return [];
-  const e = a.episodes.find(x => String(x.number) === ep);
-  if (!e) return [];
-  // TODO: resolve the real direct video URL (.mp4 or .m3u8) from the site's episode page
-  return [
-    {
-      title: "Shadzop",
-      url: e.url,
-      behaviorHints: {
-        notWebReady: true // plays in the Stremio/Nuvio app only, not in the web player
-        // If the site needs a Referer/User-Agent to serve the video, add:
-        // proxyHeaders: { request: { Referer: SITE_URL, "User-Agent": "Mozilla/5.0" } }
+
+  const e = a.episodes.find(x => String(x.number) === String(ep));
+  if (!e || !e.qualities) return [];
+
+  // Map each quality entry (1080p, 720p, 420p) to a Stremio stream object
+  return Object.entries(e.qualities).map(([quality, streamUrl]) => ({
+    name: "Shadzop",
+    title: `${quality} - Direct MP4`,
+    url: streamUrl,
+    behaviorHints: {
+      notWebReady: false,
+      proxyHeaders: {
+        request: {
+          "Referer": SITE_URL,
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
       }
     }
-  ];
+  }));
 }
 
 module.exports = { getCatalog, getMeta, getStreams, SITE_URL };
