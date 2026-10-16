@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 7000;
 const manifest = {
   id: "com.shadzop.anime",
   version: "1.0.0",
-  name: "Shadzop Anime",
+  name: "Shadzop *H* Anime",
   description: "Browse, search and play anime from the Shadzop site",
   resources: ["catalog", "meta", "stream"],
   types: ["series"],
