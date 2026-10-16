@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 7000;
 
 const manifest = {
   id: "com.shadzop.anime",
-  version: "26.10.2",
+  version: "26.10.5",
   name: "Shadzop H_Anime",
   description: "Watch your favourite H_Anime for Free in full HD.<br>Follow for more crazy content:<br><a href=\"https://youtube.com/@shadzop\" target=\"_blank\">YT</a> | <a href=\"https://youtube.com/@shadzop2\" target=\"_blank\">YT✌️</a>",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1NV-WZmNsulKAR_2gdf0gzfygyNRlW9SL9tgbcLulhASgBbtBnEfpJZs&s=10",
