@@ -18,7 +18,7 @@ async function getCatalog({ search, skip }) {
   }
   return items.slice(skip, skip + 50).map(a => ({
     id: `shadzop:${a.slug}`,
-    type: "series",
+    type: "hanime",
     name: a.name,
     poster: a.poster,
     description: a.description
@@ -33,7 +33,7 @@ async function getMeta(id) {
 
   return {
     id,
-    type: "series",
+    type: "hanime",
     name: a.name,
     poster: a.poster,
     description: a.description,
