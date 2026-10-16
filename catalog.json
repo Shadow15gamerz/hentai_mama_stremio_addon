@@ -1,4 +1,4 @@
-module.exports = [
+[
   {
     "slug": "secret-mission---undercover-agents-never-back-down",
     "name": "Secret Mission – Undercover Agents Never Back Down!",
@@ -79,4 +79,4 @@ module.exports = [
       }
     ]
   }
-];
+]
