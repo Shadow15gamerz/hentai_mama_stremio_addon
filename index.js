@@ -10,13 +10,13 @@ const manifest = {
   description: "Watch your favourite H_Anime for Free in full HD.<br>Follow for more crazy content:<br><a href="https://youtube.com/@shadzop" target="_blank">YT</a><a href="https://youtube.com/@shadzop2" target="_blank">YT✌️</a> ",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1NV-WZmNsulKAR_2gdf0gzfygyNRlW9SL9tgbcLulhASgBbtBnEfpJZs&s=10",
   resources: ["catalog", "meta", "stream"],
-  types: ["series"],
+  types: ["anime","h_Anime"],
   idPrefixes: ["shadzop"],
   catalogs: [
     {
-      type: "series",
+      type: "anime",
       id: "shadzop-anime",
-      name: "Shadzop Anime",
+      name: "Shadzop H_Anime",
       extra: [
         { name: "search", isRequired: false },
         { name: "skip", isRequired: false }
