@@ -6,9 +6,9 @@ const PORT = process.env.PORT || 7000;
 const manifest = {
   id: "com.shadzop.anime",
   version: "26.10.2",
-  name: "Shadzop *H* Anime",
+  name: "Shadzop H_Anime",
   description: "Browse, search and play anime from the Shadzop site",
-  logo: "https://www.google.com/search?q=alya+square&client=lightning&sca_esv=835a53314b04c64e&udm=2&biw=392&bih=646&sxsrf=APpeQnsCO6VCRVQaDoeLcorxEL3Jgp-igw%3A1792149137762&ei=kQbSavX9LdDH4-EP9PyQ4Qc&oq=alya+square&gs_lp=EhJtb2JpbGUtZ3dzLXdpei1pbWciC2FseWEgc3F1YXJlMgYQABgIGB4yCBAAGIAEGKIEMggQABiABBiiBDIIEAAYgAQYogQyCBAAGIAEGKIESIIkUJAFWNIicAF4AJABAJgBkwKgAYMUqgEFMC41Lje4AQPIAQD4AQGYAgagAqcIwgICECnCAg0QLhiABBiKBRhDGLEDwgINEAAYgAQYigUYQxixA8ICBRAuGIAEwgIIEC4YgAQYsQPCAgUQABiABJgDAIgGAZIHBTEuMi4zoAfGJLIHBTAuMi4zuAedCMIHBzItMi4yLjLIB0iACAE&sclient=mobile-gws-wiz-img",
+  logo: "https://kommodo.ai/i/8McVrrR2eDwRwRQRqa7v",
   resources: ["catalog", "meta", "stream"],
   types: ["series"],
   idPrefixes: ["shadzop"],
