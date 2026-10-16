@@ -5,11 +5,15 @@ const PORT = process.env.PORT || 7000;
 
 const manifest = {
   id: "com.shadzop.anime",
-  version: "26.10.5",
+  version: "26.10.12",
   name: "Shadzop H_Anime",
   description: "Watch your favourite H_Anime for Free in full HD.<br>Follow for more crazy content:<br><a href=\"https://youtube.com/@shadzop\" target=\"_blank\">YT</a> | <a href=\"https://youtube.com/@shadzop2\" target=\"_blank\">YT✌️</a>",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1NV-WZmNsulKAR_2gdf0gzfygyNRlW9SL9tgbcLulhASgBbtBnEfpJZs&s=10",
-  resources: ["catalog", "meta", "stream"],
+  resources: [
+    "catalog",
+    { "name": "meta", "types": ["hanime"], "idPrefixes": ["shadzop"] },
+    { "name": "stream", "types": ["hanime"], "idPrefixes": ["shadzop"] }
+  ],
   types: ["hanime"],
   idPrefixes: ["shadzop"],
   catalogs: [
@@ -27,7 +31,7 @@ const manifest = {
 
 const builder = new addonBuilder(manifest);
 
-// Catalog: browse list, or search when the user types in Stremio/Nuvio
+// Catalog: browse list, or search
 builder.defineCatalogHandler(async ({ type, id, extra }) => {
   if (type !== "hanime" || id !== "shadzop-h-anime") return { metas: [] };
   const metas = await site.getCatalog({
@@ -37,16 +41,16 @@ builder.defineCatalogHandler(async ({ type, id, extra }) => {
   return { metas };
 });
 
-// Meta: details + episode list for one anime
+// Meta: details + episode list
 builder.defineMetaHandler(async ({ type, id }) => {
-  if (type !== "series") return { meta: null };
+  if (type !== "hanime") return { meta: null };
   const meta = await site.getMeta(id);
   return { meta };
 });
 
-// Stream: direct playable links for one episode
+// Stream: direct playable links
 builder.defineStreamHandler(async ({ type, id }) => {
-  if (type !== "series") return { streams: [] };
+  if (type !== "hanime") return { streams: [] };
   const streams = await site.getStreams(id);
   return { streams };
 });
