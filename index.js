@@ -14,7 +14,7 @@ const manifest = {
     'Watch your favourite H_Anime for Free in full HD.<br>Follow for more crazy content:<br><a href="https://youtube.com/@shadzop" target="_blank">YT</a> | <a href="https://youtube.com/@shadzop2" target="_blank">YT✌️</a>',
   logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1NV-WZmNsulKAR_2gdf0gzfygyNRlW9SL9tgbcLulhASgBbtBnEfpJZs&s=10',
   background:
-    'https://hentaimama.io/wp-content/themes/dooplay/assets/img/large-logo.png',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh2UCLBnpXYLT7mq3JNf927gRdKM6-KU7erPk1PN5aKm2BUp1WBDdN3tAV&s=10',
   resources: ['catalog', 'meta', 'stream'],
   types: ['Shadzop H_Anime'],
   catalogs: [
